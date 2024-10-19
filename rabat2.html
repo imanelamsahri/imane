@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrida's Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="new.y"</script>
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #D8CDAF; /* Beige avec une teinte marron */
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: darkred;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .nav-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .main-image {
+            display: block;
+            margin: 20px auto; /* Centrer l'image */
+            width: 300px; /* Ajustez la taille de l'image */
+        }
+        .leaflet-container {
+            height: 400px; /* Hauteur de la carte */
+            width: 100%; /* Prendre toute la largeur du conteneur */
+            max-width: 600px; /* Limiter la largeur à 600px */
+            margin: 20px auto; /* Centrer la carte */
+        }
+        footer {
+            background-color: darkred;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Wrida's Project</h1>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#resources">Resources</a>
+            <a href="#getinvolved">Get Involved</a>
+        </div>
+    </div>
+
+    <img class="main-image" src="flower.svg" alt="Beautiful Flower" />
+
+    <div id="map" class="leaflet-container"></div> <!-- Conteneur pour la carte -->
+
+    <script>
+        // Initialisation de la carte centrée sur ny
+        const map = L.map('map').setView([40.579021, -74.151535], 16);
+
+        // Ajout de la couche de tuiles OpenStreetMap
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Ajout d'un marqueur à ny (marqueur par défaut en bleu)
+        L.marker([40.579021, -74.151535]).addTo(map)
+            .bindPopup("<b>ny</b><br>staten island.")
+            .openPopup();
+
+        // Ajout d'un polygone autour du marqueur avec une couleur rose
+        var polygon = L.polygon([
+            [34.022882, -6.843650], // Point 1
+            [34.022882, -6.839650], // Point 2
+            [34.018882, -6.839650], // Point 3
+            [34.018882, -6.843650]  // Point 4
+        ], {
+            color: 'pink',  // Bordure du polygone en rose
+            fillColor: 'pink',  // Intérieur du polygone en rose
+            fillOpacity: 0.5    // Opacité de l'intérieur du polygone
+        }).addTo(map);
+
+        // Ajouter une popup au polygone
+        polygon.bindPopup("Zone polygonale autour de ny.");
+    </script>
+
+    <footer>
+        <p>© 2024 Wrida's Project - All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+
